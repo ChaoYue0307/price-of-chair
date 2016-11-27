@@ -1,0 +1,22 @@
+__author__="chaoyue"
+
+import requests
+from bs4 import BeautifulSoup
+
+request = requests.get("http://www.lazada.sg/bath-toys-rubber-squeaky-duck-set-of-5-2660423.html")
+content = request.content
+soup = BeautifulSoup(content,"html.parser")
+element = soup.find("span",{"id":"special_price_box"})
+price = element.text.strip()#3.88
+print(float(price))
+price = float(price)
+#price_without_string = string_price[:]
+#http://www.lazada.sg/bath-toys-rubber-squeaky-duck-set-of-5-2660423.html
+#<span id="special_price_box">3.88</span>
+#print(request.content)
+if price < 100:
+    print("Buy it!")
+elif price == 100:
+    print("Buy at your own peril!")
+else:
+    print("Definitely don't buy.")
